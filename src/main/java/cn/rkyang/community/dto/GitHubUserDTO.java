@@ -1,7 +1,7 @@
 package cn.rkyang.community.dto;
 
 /**
- * GitHub用户对象
+ * GitHub用户数据传输对象
  * @author Rkyang
  */
 public class GitHubUserDTO {

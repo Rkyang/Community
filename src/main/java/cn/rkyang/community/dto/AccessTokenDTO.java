@@ -1,7 +1,7 @@
 package cn.rkyang.community.dto;
 
 /**
- * AccessToken对象
+ * AccessToken数据传输对象
  * @author Rkyang
  */
 public class AccessTokenDTO {

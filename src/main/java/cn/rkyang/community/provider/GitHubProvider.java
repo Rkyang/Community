@@ -17,8 +17,8 @@ public class GitHubProvider {
 
     /**
      * 从GitHub获取AccessToken
-     * @param accessTokenDTO
-     * @return
+     * @param accessTokenDTO GitHubAccessToken数据传输对象
+     * @return null or token
      */
     public String getAccessToken(AccessTokenDTO accessTokenDTO) {
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
@@ -41,8 +41,8 @@ public class GitHubProvider {
 
     /**
      * 从GitHub获取用户
-     * @param accessToken
-     * @return
+     * @param accessToken accessToken
+     * @return null or GitHub用户数据传输对象
      */
     public GitHubUserDTO getGitHubUser(String accessToken) {
         OkHttpClient client = new OkHttpClient();
