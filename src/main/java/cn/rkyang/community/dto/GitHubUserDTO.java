@@ -1,11 +1,24 @@
 package cn.rkyang.community.dto;
 
 /**
+ * GitHub用户对象
  * @author Rkyang
  */
 public class GitHubUserDTO {
+
+    /**
+     * 用户名
+     */
     private String name;
+
+    /**
+     * 用户id
+     */
     private Long id;
+
+    /**
+     * 用户bio
+     */
     private String bio;
 
     public String getName() {
@@ -30,5 +43,14 @@ public class GitHubUserDTO {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    @Override
+    public String toString() {
+        return "GitHubUserDTO{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", bio='" + bio + '\'' +
+                '}';
     }
 }
