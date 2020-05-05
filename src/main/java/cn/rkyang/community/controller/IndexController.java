@@ -5,7 +5,6 @@ import cn.rkyang.community.model.User;
 import cn.rkyang.community.util.SessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**

@@ -52,12 +52,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+<<<<<<< HEAD
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
 
+=======
+>>>>>>> 6393ed3a2fb8f053048f38ef635e6ababca3ac49
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
