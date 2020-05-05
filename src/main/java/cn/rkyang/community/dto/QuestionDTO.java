@@ -1,15 +1,16 @@
-package cn.rkyang.community.model;
+package cn.rkyang.community.dto;
 
+import cn.rkyang.community.model.User;
 import lombok.Data;
 
 /**
- * 问题模型
+ * 问题数据传输对象
  * @author Rkyang
  * @version 1.0
- * @date 2020/5/5 00:02
+ * @date 2020/5/5 16:37
  */
 @Data
-public class Question {
+public class QuestionDTO {
 
     /**
      * 问题id
@@ -44,20 +45,25 @@ public class Question {
     /**
      * 评论数
      */
-    private Integer commentCount = 0;
+    private Integer commentCount;
 
     /**
      * 浏览数
      */
-    private Integer viewCount = 0;
+    private Integer viewCount;
 
     /**
      * 点赞数
      */
-    private Integer likeCount = 0;
+    private Integer likeCount;
 
     /**
      * 标签
      */
     private String tag;
+
+    /**
+     * 用户模型
+     */
+    private User user;
 }

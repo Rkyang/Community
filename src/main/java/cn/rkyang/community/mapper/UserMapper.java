@@ -18,8 +18,8 @@ public interface UserMapper {
      * 增加用户
      * @param user 用户模型
      */
-    @Insert("insert into user (name,account_id,token,create_time,modified_time) values (#{name},#{accountId}," +
-            "#{token},#{createTime},#{modifiedTime})")
+    @Insert("insert into user (name,account_id,token,create_time,modified_time,avatar_url) values (#{name}," +
+            "#{accountId},#{token},#{createTime},#{modifiedTime},#{avatarUrl})")
     void insert(User user);
 
     /**
@@ -29,4 +29,12 @@ public interface UserMapper {
      */
     @Select("select * from user where token = #{token}")
     User findByToken(String token);
+
+    /**
+     * 通过id查询
+     * @param creator id
+     * @return 用户模型
+     */
+    @Select("select * from user where id = #{creator}")
+    User findById(Integer creator);
 }

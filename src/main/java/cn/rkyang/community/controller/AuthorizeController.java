@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
- * 登录控制
+ * 登录控制层
  * @author Rkyang
  */
 @Controller
@@ -64,6 +64,7 @@ public class AuthorizeController {
             user.setAccountId(String.valueOf(userDTO.getId()));
             user.setCreateTime(System.currentTimeMillis());
             user.setModifiedTime(user.getCreateTime());
+            user.setAvatarUrl(userDTO.getAvatarUrl());
             userMapper.insert(user);
             response.addCookie(new Cookie("token", token));
         }

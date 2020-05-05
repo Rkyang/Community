@@ -1,11 +1,14 @@
 package cn.rkyang.community.model;
 
+import lombok.Data;
+
 /**
  * 用户模型，数据库用
  * @author Rkyang
  * @date 2020/5/3 14:52
  * @version 1.0
  */
+@Data
 public class User {
 
     /**
@@ -38,63 +41,8 @@ public class User {
      */
     private Long modifiedTime;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getModifiedTime() {
-        return modifiedTime;
-    }
-
-    public void setModifiedTime(Long modifiedTime) {
-        this.modifiedTime = modifiedTime;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", accountId='" + accountId + '\'' +
-                ", token='" + token + '\'' +
-                ", createTime=" + createTime +
-                ", modifiedTime=" + modifiedTime +
-                '}';
-    }
+    /**
+     * 头像路径
+     */
+    private String avatarUrl;
 }

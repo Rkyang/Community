@@ -1,8 +1,12 @@
 package cn.rkyang.community.mapper;
 
+import cn.rkyang.community.dto.QuestionDTO;
 import cn.rkyang.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * 问题数据层
@@ -21,4 +25,11 @@ public interface QuestionMapper {
             "like_count,tag) values (#{title},#{description},#{createTime},#{modifiedTime},#{creator}," +
             "#{commentCount},#{viewCount},#{likeCount},#{tag})")
     void create(Question question);
+
+    /**
+     * 问题列表
+     * @return 查询结果
+     */
+    @Select("select * from question")
+    List<QuestionDTO> list();
 }

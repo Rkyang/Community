@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 发布问题控制
+ * 发布问题控制层
  * @author Rkyang
  * @version 1.0
  * @date 2020/5/4 18:34
