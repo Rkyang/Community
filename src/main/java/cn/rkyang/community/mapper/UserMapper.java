@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 /**
- * 用户表数据层
+ * 用户数据层
  * @author Rkyang
  * @date 2020/5/3 14:49
  * @version 1.0

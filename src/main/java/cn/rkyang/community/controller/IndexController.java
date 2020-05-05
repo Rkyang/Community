@@ -2,10 +2,10 @@ package cn.rkyang.community.controller;
 
 import cn.rkyang.community.mapper.UserMapper;
 import cn.rkyang.community.model.User;
+import cn.rkyang.community.util.SessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -27,18 +27,9 @@ public class IndexController {
      */
     @GetMapping("/")
     public String index(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-            return "index";
-        }
-        for (Cookie cookie : cookies) {
-            if ("token".equals(cookie.getName())) {
-                String token = cookie.getValue();
-                User user = userMapper.findByToken(token);
-                if (user != null) {
-                    request.getSession().setAttribute("user",user);
-                }
-            }
+        User user = SessionUtil.getUserInfo(request);
+        if (user != null) {
+            request.getSession().setAttribute("user", user);
         }
         return "index";
     }
