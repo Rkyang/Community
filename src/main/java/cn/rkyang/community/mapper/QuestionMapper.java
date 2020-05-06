@@ -4,6 +4,7 @@ import cn.rkyang.community.dto.QuestionDTO;
 import cn.rkyang.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -29,7 +30,16 @@ public interface QuestionMapper {
     /**
      * 问题列表
      * @return 查询结果
+     * @param page 页条数
+     * @param size 当前页
      */
-    @Select("select * from question")
-    List<QuestionDTO> list();
+    @Select("select * from question limit #{page}, #{size}")
+    List<QuestionDTO> list(@Param("page") Integer page,  @Param("size") Integer size);
+
+    /**
+     * 数据总条数
+     * @return 总条数
+     */
+    @Select("select count(1) from question")
+    Integer count();
 }

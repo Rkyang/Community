@@ -1,5 +1,6 @@
 package cn.rkyang.community.service;
 
+import cn.rkyang.community.dto.PageDTO;
 import cn.rkyang.community.dto.QuestionDTO;
 import cn.rkyang.community.mapper.QuestionMapper;
 import cn.rkyang.community.mapper.UserMapper;
@@ -29,13 +30,18 @@ public class QuestionService {
     /**
      * 获取问题列表
      * @return
+     * @param page
+     * @param size
      */
-    public List<QuestionDTO> list() {
-        List<QuestionDTO> list = questionMapper.list();
+    public PageDTO list(Integer page, Integer size) {
+        List<QuestionDTO> list = questionMapper.list((size * (page -1)), size);
         for (QuestionDTO questionDTO : list) {
             User user = userMapper.findById(questionDTO.getCreator());
             questionDTO.setUser(user);
         }
-        return list;
+        PageDTO pageDTO = new PageDTO();
+        pageDTO.setQuestionDTOList(list);
+        pageDTO.setPageInfo(questionMapper.count(), page, size);
+        return pageDTO;
     }
 }
