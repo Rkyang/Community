@@ -17,7 +17,7 @@
                 <div class="media" th:each="question : ${pages.getQuestionDTOList()}">
                     <div class="media-left">
                         <a href="#">
-                            <img class="media-object img-rounded" th:src="${question.user.getAvatarUrl()}"
+                            <img class="media-object img-rounded" th:src="${question.getUser().getAvatarUrl()}"
                                  style="width: 40px">
                         </a>
                     </div>
@@ -30,16 +30,26 @@
                 </div>
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
+                        <li th:if="${pages.getShowFirst()}">
+                            <a th:href="@{/(page=1)}" aria-label="showFirst">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li th:each="page1 : ${pages.pages}" th:class="${pages.page == page1} ? 'active' : ''">
-                            <a href="/" th:href="@{/(page=${page1})}" th:text="${page1}"></a>
+                        <li th:if="${pages.getShowOn()}">
+                            <a th:href="@{/(page=${pages.page - 1})}" aria-label="showOn">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
                         </li>
-                        <li>
-                            <a href="#" aria-label="Next">
+                        <li th:each="page1 : ${pages.pages}" th:class="${pages.page == page1} ? 'active' : ''">
+                            <a th:href="@{/(page=${page1})}" th:text="${page1}"></a>
+                        </li>
+                        <li th:if="${pages.getShowNext()}">
+                            <a th:href="@{/(page=${pages.page + 1})}" aria-label="showNext">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                        <li th:if="${pages.getShowLast()}">
+                            <a th:href="@{/(page=${pages.getTotalPage()})}" aria-label="showLast">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>

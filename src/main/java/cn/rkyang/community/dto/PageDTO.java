@@ -25,6 +25,11 @@ public class PageDTO {
     private Integer page;
 
     /**
+     * 总页数
+     */
+    private Integer totalPage;
+
+    /**
      * 页的显示页码
      */
     private List<Integer> pages = new ArrayList<Integer>();
@@ -49,14 +54,19 @@ public class PageDTO {
      */
     private Boolean showOn;
 
+    /**
+     * 设置分页信息，放在此处是错误的
+     * @param total 总条数
+     * @param page 页数
+     * @param size 页显示数量
+     */
     public void setPageInfo(Integer total, Integer page, Integer size) {
-        Integer totalPage;
         if (total % size == 0) {
             totalPage = total / size;
         }else {
             totalPage = total / size + 1;
         }
-        if (page > 1) {
+        if (page < 1) {
             page = 1;
         }
         if (page > totalPage) {
@@ -64,12 +74,14 @@ public class PageDTO {
         }
         this.page = page;
         pages.add(page);
-        for (int i = 0; i <= 3; i++) {
+        for (int i = 1; i <= 3; i++) {
             if (page - i > 0) {
                 pages.add(0, page - i);
             }
-            if (page + i <= totalPage) {
-                pages.add(page + i);
+            if (page + 1 <= totalPage) {
+                if (page + i <= totalPage) {
+                    pages.add(page + i);
+                }
             }
         }
         //是否展示上一页
