@@ -3,6 +3,7 @@
 <head>
     <title>Community</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="js/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
@@ -12,7 +13,7 @@
     <div class="container-fluid" style="margin: 30px;background-color: white">
         <div class="row">
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发现</h3>
+                <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span>Discover</h3>
                 <hr>
                 <div class="media" th:each="question : ${pages.getQuestionDTOList()}">
                     <div class="media-left">
@@ -57,10 +58,10 @@
                 </nav>
             </div>
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                <h3>热门话题</h3>
-                问题发起指南问题发起指南问题发起指南 <br>
-                问题发起指南问题发起指南 <br>
-                问题发起指南
+                <h3>Hot topic</h3>
+                Hot topic Hot topic Hot topic Hot topic <br>
+                Hot topic Hot topic Hot topic <br>
+                Hot topic Hot topic
             </div>
         </div>
     </div>

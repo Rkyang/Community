@@ -3,6 +3,7 @@
 <head>
     <title>Community</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="js/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
@@ -20,21 +21,25 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="搜索问题">
+                        <input type="text" class="form-control" placeholder="Search questions">
                     </div>
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="submit" class="btn btn-default">Search</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" th:if="${session.user != null}">
-                        <a href="/publish" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">发布
-                        </a>
+                        <a href="/publish" aria-expanded="false">Release</a>
                     </li>
                     <li class="dropdown" th:if="${session.user != null}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false" th:text="${session.user.getId()}">
+                           aria-expanded="false">
+                            <span th:text="${session.user.getId()}"></span>
                             <span class="caret"></span>
                         </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/profile/questions">My questions</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                        </ul>
                     </li>
                     <li th:if="${session.user == null}">
                         <a href="https://github.com/login/oauth/authorize?client_id=ec34caaee69b28f6a5a5&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录
