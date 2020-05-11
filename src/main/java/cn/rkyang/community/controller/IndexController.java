@@ -1,6 +1,7 @@
 package cn.rkyang.community.controller;
 
 import cn.rkyang.community.dto.PageDTO;
+import cn.rkyang.community.mapper.UserMapper;
 import cn.rkyang.community.model.User;
 import cn.rkyang.community.service.QuestionService;
 import cn.rkyang.community.util.SessionUtil;
@@ -20,8 +21,11 @@ public class IndexController {
 
     private final QuestionService questionService;
 
-    public IndexController(QuestionService questionService) {
+    private final UserMapper userMapper;
+
+    public IndexController(QuestionService questionService, UserMapper userMapper) {
         this.questionService = questionService;
+        this.userMapper = userMapper;
     }
 
     /**
@@ -32,9 +36,11 @@ public class IndexController {
     public String index(HttpServletRequest request, Model model, @RequestParam(defaultValue = "1")Integer page,
                         @RequestParam(defaultValue = "5") Integer size) {
         User user = SessionUtil.getUserInfo(request);
-        if (user != null) {
-            request.getSession().setAttribute("user", user);
+        if (user == null) {
+            //这里是因为经常访问GitHub失败，所以设死
+            user = userMapper.findById(197);
         }
+        request.getSession().setAttribute("user", user);
         PageDTO pageDTO = questionService.list(page, size);
         model.addAttribute("pages", pageDTO);
         return "main";

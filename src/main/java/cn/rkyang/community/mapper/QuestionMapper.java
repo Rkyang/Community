@@ -1,6 +1,5 @@
 package cn.rkyang.community.mapper;
 
-import cn.rkyang.community.dto.QuestionDTO;
 import cn.rkyang.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -30,11 +29,11 @@ public interface QuestionMapper {
     /**
      * 问题列表
      * @return 查询结果
-     * @param page 页条数
-     * @param size 当前页
+     * @param page 当前页
+     * @param size 页条数
      */
     @Select("select * from question limit #{page}, #{size}")
-    List<QuestionDTO> list(@Param("page") Integer page,  @Param("size") Integer size);
+    List<Question> list(@Param("page") Integer page,  @Param("size") Integer size);
 
     /**
      * 数据总条数
@@ -42,4 +41,22 @@ public interface QuestionMapper {
      */
     @Select("select count(1) from question")
     Integer count();
+
+    /**
+     * 通过用户查询
+     * @param id 用户id
+     * @param page 当前页
+     * @param size 页条数
+     * @return 问题模型
+     */
+    @Select("select * from question where creator = #{id} limit #{page}, #{size}")
+    List<Question> findByUser(@Param("id") Integer id, @Param("page") Integer page, @Param("size") Integer size);
+
+    /**
+     * 通过用户查询总条数
+     * @param id 用户id
+     * @return 总条数
+     */
+    @Select("select count(1) from question where creator = #{id}")
+    Integer countByUser(@Param("id") Integer id);
 }
