@@ -26,19 +26,19 @@ public class ProFileController {
 
     private final QuestionService questionService;
 
-    public ProFileController (UserMapper userMapper, QuestionService questionService) {
+    public ProFileController(UserMapper userMapper, QuestionService questionService) {
         this.userMapper = userMapper;
         this.questionService = questionService;
     }
 
     /**
      * 动态获取信息
-     * @param action
-     * @param model
-     * @param request
-     * @param page
-     * @param size
-     * @return
+     * @param action 路径
+     * @param model model
+     * @param request request
+     * @param page 当前页
+     * @param size 页条数
+     * @return 路径
      */
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name = "action") String action, Model model, HttpServletRequest request,

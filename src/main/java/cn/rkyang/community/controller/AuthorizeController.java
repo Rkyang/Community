@@ -23,10 +23,7 @@ public class AuthorizeController {
 
     private final GitHubProvider gitHubProvider;
 
-    public AuthorizeController(GitHubProvider gitHubProvider, UserMapper userMapper) {
-        this.gitHubProvider = gitHubProvider;
-        this.userMapper = userMapper;
-    }
+    private final UserMapper userMapper;
 
     @Value("${github.client.id}")
     private String clientId;
@@ -37,7 +34,10 @@ public class AuthorizeController {
     @Value("${github.redirect.uri}")
     private String redirectUri;
 
-    private final UserMapper userMapper;
+    public AuthorizeController(GitHubProvider gitHubProvider, UserMapper userMapper) {
+        this.gitHubProvider = gitHubProvider;
+        this.userMapper = userMapper;
+    }
 
     /**
      * GitHub授权登录callback

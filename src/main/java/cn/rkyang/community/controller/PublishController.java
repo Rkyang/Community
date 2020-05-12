@@ -29,7 +29,7 @@ public class PublishController {
 
     /**
      * 发布问题页面
-     * @return
+     * @return 页面路径
      */
     @GetMapping("/publish")
     public String publishQuestionView() {

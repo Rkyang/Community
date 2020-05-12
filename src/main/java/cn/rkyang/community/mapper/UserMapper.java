@@ -4,6 +4,7 @@ import cn.rkyang.community.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
 
 /**
  * 用户数据层
@@ -12,6 +13,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 1.0
  */
 @Mapper
+@Component(value = "UserMapper")
 public interface UserMapper {
 
     /**
