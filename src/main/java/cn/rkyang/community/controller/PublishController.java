@@ -3,7 +3,6 @@ package cn.rkyang.community.controller;
 import cn.rkyang.community.mapper.QuestionMapper;
 import cn.rkyang.community.model.Question;
 import cn.rkyang.community.model.User;
-import cn.rkyang.community.util.SessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -45,7 +44,6 @@ public class PublishController {
      */
     @PostMapping("/publish")
     public String publishQuestion(HttpServletRequest request, Question question, Model model) {
-        User user = SessionUtil.getUserInfo(request);
         //下面的数据回显及三个校验应由前端校验，此处只做测试
         model.addAttribute("title", question.getTitle());
         model.addAttribute("description", question.getDescription());
@@ -62,6 +60,7 @@ public class PublishController {
             model.addAttribute("error", "问题标签不能为空");
             return "/publish";
         }
+        User user = (User)request.getSession().getAttribute("user");
         question.setCreator(user.getId());
         question.setCreateTime(System.currentTimeMillis());
         question.setModifiedTime(question.getCreateTime());

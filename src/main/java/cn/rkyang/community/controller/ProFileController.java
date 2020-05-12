@@ -1,10 +1,8 @@
 package cn.rkyang.community.controller;
 
 import cn.rkyang.community.dto.PageDTO;
-import cn.rkyang.community.mapper.UserMapper;
 import cn.rkyang.community.model.User;
 import cn.rkyang.community.service.QuestionService;
-import cn.rkyang.community.util.SessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ProFileController {
 
-    private final UserMapper userMapper;
-
     private final QuestionService questionService;
 
-    public ProFileController(UserMapper userMapper, QuestionService questionService) {
-        this.userMapper = userMapper;
+    public ProFileController(QuestionService questionService) {
         this.questionService = questionService;
     }
 
@@ -43,18 +38,16 @@ public class ProFileController {
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name = "action") String action, Model model, HttpServletRequest request,
                           @RequestParam(defaultValue = "1")Integer page,@RequestParam(defaultValue = "5")Integer size) {
-        User user = SessionUtil.getUserInfo(request);
-        if (user == null) {
-            //这里是因为经常访问GitHub失败，所以设死
-            user = userMapper.findById(197);
-        }
-        request.getSession().setAttribute("user", user);
         if ("questions".equals(action)) {
             model.addAttribute("section", "questions");
             model.addAttribute("sectionName", "My questions");
         }else if ("repies".equals(action)) {
             model.addAttribute("section", "repies");
             model.addAttribute("sectionName", "Latest Reply");
+        }
+        User user = (User)request.getSession().getAttribute("user");
+        if (user == null) {
+            return "redirect:/";
         }
         PageDTO pageDTO = questionService.findByUser(user.getId(), page, size);
         model.addAttribute("pages",pageDTO);

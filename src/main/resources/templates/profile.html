@@ -38,25 +38,25 @@
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <li th:if="${pages.getShowFirst()}">
-                            <a th:href="@{/profile/questions(page=1)}" aria-label="showFirst">
+                            <a th:href="@{'/profile/'+${section}(page=1)}" aria-label="showFirst">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li th:if="${pages.getShowOn()}">
-                            <a th:href="@{/profile/questions(page=${pages.page - 1})}" aria-label="showOn">
+                            <a th:href="@{'/profile/'+${section}(page=${pages.page - 1})}" aria-label="showOn">
                                 <span aria-hidden="true">&lt;</span>
                             </a>
                         </li>
                         <li th:each="page1 : ${pages.pages}" th:class="${pages.page == page1} ? 'active' : ''">
-                            <a th:href="@{/profile/questions(page=${page1})}" th:text="${page1}"></a>
+                            <a th:href="@{'/profile/'+${section}(page=${page1})}" th:text="${page1}"></a>
                         </li>
                         <li th:if="${pages.getShowNext()}">
-                            <a th:href="@{/profile/questions(page=${pages.page + 1})}" aria-label="showNext">
+                            <a th:href="@{'/profile/'+${section}(page=${pages.page + 1})}" aria-label="showNext">
                                 <span aria-hidden="true">&gt;</span>
                             </a>
                         </li>
                         <li th:if="${pages.getShowLast()}">
-                            <a th:href="@{/profile/questions(page=${pages.getTotalPage()})}" aria-label="showLast">
+                            <a th:href="@{'/profile/'+${section}(page=${pages.getTotalPage()})}" aria-label="showLast">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
