@@ -6,3 +6,5 @@
 - [Thymeleaf](https://fanlychie.github.io/post/thymeleaf.html)
 - [H2](http://h2database.com/html/quickstart.html)
 - [Lombok](https://projectlombok.org/features/all)
+- [Spring](https://spring.io/guides)
+- [Spring Framework Doc 5.2.6](https://docs.spring.io/spring/docs/current/spring-framework-reference/)
