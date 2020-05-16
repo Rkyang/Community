@@ -23,7 +23,9 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading" th:text="${question.getTitle()}"></h4>
+                        <h4 class="media-heading">
+                            <a th:href="@{'question/' + ${question.getId()}}" th:text="${question.getTitle()}"></a>
+                        </h4>
                         <span style="color: #999999;size: 12px" th:text="${question.getDescription() + '·'}"></span>
                         <span style="color: #999999;size: 12px"
                               th:text="${#dates.format(question.getCreateTime(),'yyyy-MM-dd HH:mm:ss')}"></span>

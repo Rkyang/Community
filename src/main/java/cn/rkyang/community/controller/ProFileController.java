@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 我的问题页面右侧导航栏路径控制
+ * 我的问题页面右侧导航栏路径控制层
  * @author Rkyang
  * @version 1.0
  * @date 2020/5/11 21:18
