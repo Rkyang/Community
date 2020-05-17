@@ -22,6 +22,12 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
+    /**
+     * 问题数据回显
+     * @param id 问题id
+     * @param model model
+     * @return 路径
+     */
     @GetMapping("/question/{id}")
     public String question(@PathVariable(name = "id")Integer id, Model model) {
         QuestionDTO questionDTO = questionService.getById(id);

@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                 <h3><span th:text="${question.getTitle()}"></span></h3>
-                <span class="text-desc">
+                <span class="text-desc" style="color: #999">
                     Author:<span th:text="${question.getUser().getName()}"></span> |
                     Release time:<span
                         th:text="${#dates.format(question.getCreateTime(),'yyyy-MM-dd HH:mm:ss')}"></span> |
@@ -23,7 +23,8 @@
                 <hr>
                 <div th:text="${question.getDescription()}"></div>
                 <hr>
-                <a th:href="@{'/publish' + ${question.getId()}}" style="color: #999">
+                <a th:href="@{'/publish/' + ${question.getId()}}" style="color: #999"
+                   th:if="${session.user != null && session.user.getId() == question.getUser().getId()}">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     Edit
                 </a>
@@ -38,7 +39,7 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h5 class="media-heading">
+                        <h5 class="media-heading" style="margin-top: 12px">
                             <span th:text="${question.getUser().getName()}"></span>
                         </h5>
                     </div>

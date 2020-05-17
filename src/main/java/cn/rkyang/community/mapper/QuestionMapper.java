@@ -1,10 +1,7 @@
 package cn.rkyang.community.mapper;
 
 import cn.rkyang.community.model.Question;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -69,4 +66,12 @@ public interface QuestionMapper {
      */
     @Select("select * from question where id = #{id}")
     Question getById(Integer id);
+
+    /**
+     * 更新问题
+     * @param question 问题对象
+     */
+    @Update("update question set title=#{title},description=#{description},tag=#{tag},modified_time=#{modifiedTime} " +
+            "where id=#{id}")
+    void update(Question question);
 }

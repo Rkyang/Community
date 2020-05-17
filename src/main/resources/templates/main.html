@@ -26,9 +26,16 @@
                         <h4 class="media-heading">
                             <a th:href="@{'question/' + ${question.getId()}}" th:text="${question.getTitle()}"></a>
                         </h4>
-                        <span style="color: #999999;size: 12px" th:text="${question.getDescription() + '·'}"></span>
-                        <span style="color: #999999;size: 12px"
-                              th:text="${#dates.format(question.getCreateTime(),'yyyy-MM-dd HH:mm:ss')}"></span>
+                        <span th:if="${question.getDescription().length() > 10}">
+                            <span style="color: #999999;font-size: 12px"
+                                  th:text="${question.getDescription().substring(0,10) + '...'}">
+                            </span>
+                        </span>
+                        <span th:if="${question.getDescription().length() < 10}">
+                            <span style="color: #999999;font-size: 12px" th:text="${question.getDescription()}"></span>
+                        </span>
+                        <span style="color: #999999;font-size: 12px"
+                              th:text="${' | '+#dates.format(question.getCreateTime(),'yyyy-MM-dd HH:mm:ss')}"></span>
                     </div>
                 </div>
                 <nav aria-label="Page navigation">

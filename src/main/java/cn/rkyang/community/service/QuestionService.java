@@ -8,6 +8,7 @@ import cn.rkyang.community.model.Question;
 import cn.rkyang.community.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,5 +86,20 @@ public class QuestionService {
         BeanUtils.copyProperties(question,questionDTO);
         questionDTO.setUser(user);
         return questionDTO;
+    }
+
+    /**
+     * 问题增加或修改
+     * @param question 问题对象
+     */
+    public void createOrUpdate(Question question) {
+        if (StringUtils.isEmpty(question.getId())) {
+            question.setCreateTime(System.currentTimeMillis());
+            question.setModifiedTime(question.getCreateTime());
+            questionMapper.create(question);
+        }else {
+            question.setModifiedTime(System.currentTimeMillis());
+            questionMapper.update(question);
+        }
     }
 }

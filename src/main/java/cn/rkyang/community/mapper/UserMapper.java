@@ -1,9 +1,7 @@
 package cn.rkyang.community.mapper;
 
 import cn.rkyang.community.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -39,4 +37,20 @@ public interface UserMapper {
      */
     @Select("select * from user where id = #{creator}")
     User findById(Integer creator);
+
+    /**
+     * 通过AccountId查询
+     * @param accountId accountId
+     * @return 查询结果
+     */
+    @Select("select * from user where account_id = #{accountId}")
+    User findByAccountId(String accountId);
+
+    /**
+     * 更新用户
+     * @param dbUser 用户对象
+     */
+    @Update("update user set name=#{name},avatar_url=#{avatarUrl},token=#{token},modified_time=#{modifiedTime} where " +
+            "id=#{id}")
+    void update(User dbUser);
 }

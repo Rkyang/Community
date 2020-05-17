@@ -1,12 +1,14 @@
 package cn.rkyang.community.controller;
 
-import cn.rkyang.community.mapper.QuestionMapper;
+import cn.rkyang.community.dto.QuestionDTO;
 import cn.rkyang.community.model.Question;
 import cn.rkyang.community.model.User;
+import cn.rkyang.community.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,10 +22,10 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class PublishController {
 
-    private final QuestionMapper questionMapper;
+    private final QuestionService questionService;
 
-    public PublishController(QuestionMapper questionMapper) {
-        this.questionMapper = questionMapper;
+    public PublishController(QuestionService questionService) {
+        this.questionService = questionService;
     }
 
     /**
@@ -62,9 +64,22 @@ public class PublishController {
         }
         User user = (User)request.getSession().getAttribute("user");
         question.setCreator(user.getId());
-        question.setCreateTime(System.currentTimeMillis());
-        question.setModifiedTime(question.getCreateTime());
-        questionMapper.create(question);
+        questionService.createOrUpdate(question);
         return "redirect:/";
+    }
+
+    /**
+     * 修改问题
+     * @param id
+     * @return
+     */
+    @GetMapping("/publish/{id}")
+    public String editQuestion(@PathVariable(name = "id") Integer id, Model model) {
+        QuestionDTO questionDTO = questionService.getById(id);
+        model.addAttribute("title", questionDTO.getTitle());
+        model.addAttribute("description", questionDTO.getDescription());
+        model.addAttribute("tag", questionDTO.getTag());
+        model.addAttribute("id",questionDTO.getId());
+        return "/publish";
     }
 }
