@@ -63,7 +63,7 @@ public class PublishController {
             return "/publish";
         }
         User user = (User)request.getSession().getAttribute("user");
-        question.setCreator(user.getId());
+        question.setCreator(Integer.valueOf(user.getId()));
         questionService.createOrUpdate(question);
         return "redirect:/";
     }

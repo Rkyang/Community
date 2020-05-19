@@ -2,7 +2,10 @@ package cn.rkyang.community.service;
 
 import cn.rkyang.community.mapper.UserMapper;
 import cn.rkyang.community.model.User;
+import cn.rkyang.community.model.UserExample;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 用户业务层
@@ -24,17 +27,20 @@ public class UserService {
      * @param user 用户对象
      */
     public void createOrUpdate(User user) {
-        User dbUser = userMapper.findByAccountId(user.getAccountId());
-        if (dbUser == null) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andAccountIdEqualTo(user.getAccountId());
+        List<User> users = userMapper.selectByExample(userExample);
+        if (users == null && users.size() == 0) {
             user.setCreateTime(System.currentTimeMillis());
             user.setModifiedTime(user.getCreateTime());
             userMapper.insert(user);
         }else {
+            User dbUser = users.get(0);
             dbUser.setModifiedTime(System.currentTimeMillis());
             dbUser.setAvatarUrl(user.getAvatarUrl());
             dbUser.setName(user.getName());
             dbUser.setToken(user.getToken());
-            userMapper.update(dbUser);
+            userMapper.updateByExampleSelective(dbUser, userExample);
         }
     }
 }

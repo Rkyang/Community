@@ -49,7 +49,7 @@ public class ProFileController {
         if (user == null) {
             return "redirect:/";
         }
-        PageDTO pageDTO = questionService.findByUser(user.getId(), page, size);
+        PageDTO pageDTO = questionService.findByUser(Integer.valueOf(user.getId()), page, size);
         model.addAttribute("pages",pageDTO);
         return "profile";
     }
