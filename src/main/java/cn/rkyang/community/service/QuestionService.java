@@ -112,7 +112,7 @@ public class QuestionService {
         if (StringUtils.isEmpty(question.getId())) {
             question.setCreateTime(System.currentTimeMillis());
             question.setModifiedTime(question.getCreateTime());
-            questionMapper.insert(question);
+            questionMapper.insertSelective(question);
         }else {
             question.setModifiedTime(System.currentTimeMillis());
             int update = questionMapper.updateByPrimaryKeySelective(question);
@@ -120,5 +120,15 @@ public class QuestionService {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_EXIST);
             }
         }
+    }
+
+    /**
+     * 增加阅读数(存在并发问题，应改修改sql为阅读数=阅读数+1)
+     * @param id 问题主键
+     */
+    public void incView(Integer id) {
+        Question question = questionMapper.selectByPrimaryKey(id);
+        question.setViewCount(question.getViewCount() + 1);
+        questionMapper.updateByPrimaryKeySelective(question);
     }
 }

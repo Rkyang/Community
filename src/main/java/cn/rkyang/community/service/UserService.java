@@ -33,7 +33,7 @@ public class UserService {
         if (users == null && users.size() == 0) {
             user.setCreateTime(System.currentTimeMillis());
             user.setModifiedTime(user.getCreateTime());
-            userMapper.insert(user);
+            userMapper.insertSelective(user);
         }else {
             User dbUser = users.get(0);
             dbUser.setModifiedTime(System.currentTimeMillis());

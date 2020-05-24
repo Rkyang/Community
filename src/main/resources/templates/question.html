@@ -18,7 +18,7 @@
                     Author:<span th:text="${question.getUser().getName()}"></span> |
                     Release time:<span
                         th:text="${#dates.format(question.getCreateTime(),'yyyy-MM-dd HH:mm:ss')}"></span> |
-                    Reading:<span th:text="${question.getViewCount()}"></span>
+                    Number of reads:<span th:text="${question.getViewCount()}"></span>
                 </span>
                 <hr>
                 <div th:text="${question.getDescription()}"></div>
