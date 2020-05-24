@@ -2,6 +2,8 @@ package cn.rkyang.community.service;
 
 import cn.rkyang.community.dto.PageDTO;
 import cn.rkyang.community.dto.QuestionDTO;
+import cn.rkyang.community.exception.CustomizeErrorCode;
+import cn.rkyang.community.exception.CustomizeException;
 import cn.rkyang.community.mapper.QuestionMapper;
 import cn.rkyang.community.mapper.UserMapper;
 import cn.rkyang.community.model.Question;
@@ -92,6 +94,9 @@ public class QuestionService {
      */
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.selectByPrimaryKey(id);
+        if (question == null) {
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_EXIST);
+        }
         User user = userMapper.selectByPrimaryKey(question.getCreator().toString());
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
@@ -110,7 +115,10 @@ public class QuestionService {
             questionMapper.insert(question);
         }else {
             question.setModifiedTime(System.currentTimeMillis());
-            questionMapper.updateByPrimaryKeySelective(question);
+            int update = questionMapper.updateByPrimaryKeySelective(question);
+            if (update != 1) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_EXIST);
+            }
         }
     }
 }

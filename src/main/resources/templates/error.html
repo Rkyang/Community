@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Community</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+<body style="background-color: #efefef">
+    <div th:insert="index :: navigationBar"></div>
+        <div class="jumbotron" style="padding-left: 10%">
+            <h1>Error !!!</h1>
+            <p th:text="${message}">Something went wrong...</p>
+            <p><a class="btn btn-primary btn-lg" href="/" role="button">Back to home</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
